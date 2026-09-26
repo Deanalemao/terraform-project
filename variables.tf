@@ -94,3 +94,8 @@ variable "ami" {
 variable "keyname" {
   description = "keyname value"
 }
+
+#alb target group
+variable "TGport" {
+  description = "TGport value"
+}
