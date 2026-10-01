@@ -1,6 +1,9 @@
+```markdown
 # 🚀 AWS Infrastructure with Terraform
 
 > A hands-on Infrastructure as Code project for provisioning and managing AWS infrastructure using Terraform.
+
+---
 
 ## 📌 Overview
 
@@ -8,9 +11,11 @@ This project demonstrates how to provision and connect multiple AWS services usi
 
 The project focuses on understanding how AWS networking, compute, storage, and load balancing components work together and how Terraform can be used to manage infrastructure through code.
 
+---
+
 ## 🏗️ Architecture
 
-
+```text
                               🌐 Internet
                                   │
                                   ▼
@@ -45,23 +50,27 @@ The project focuses on understanding how AWS networking, compute, storage, and l
                          ┌─────────────┐
                          │ S3 Bucket   │
                          └─────────────┘
+```
 
 ---
 
 ## ☁️ AWS Resources
 
 The infrastructure includes the following AWS resources:
-- VPC – Custom VPC with a dedicated CIDR block
-- Subnets – Two public subnets across Availability Zones
-- Internet Gateway – Provides internet connectivity for the public subnets
-- Route Table – Configures routing through the Internet Gateway
-- Security Group – Configured for HTTP and SSH access with outbound traffic rules
-- EC2 – Two EC2 instances provisioned using Terraform
-- Application Load Balancer – Distributes incoming traffic between the EC2 instances
-- Target Group – Registers both EC2 instances as targets
-- ALB Listener – Handles HTTP traffic and forwards requests to the target group
-- S3 – S3 bucket created using Terraform
-- Terraform Remote State – Terraform state configured to be stored remotely using Amazon S3
+
+| Resource | Description |
+|----------|-------------|
+| **VPC** | Custom VPC with a dedicated CIDR block |
+| **Subnets** | Two public subnets across Availability Zones |
+| **Internet Gateway** | Provides internet connectivity to the public subnets |
+| **Route Table** | Routes internet traffic through the Internet Gateway |
+| **Security Group** | Controls inbound and outbound traffic |
+| **EC2** | Two EC2 instances provisioned using Terraform |
+| **Application Load Balancer** | Distributes incoming HTTP traffic between EC2 instances |
+| **Target Group** | Registers the EC2 instances as targets |
+| **ALB Listener** | Listens for HTTP traffic and forwards requests to the target group |
+| **S3** | S3 bucket provisioned using Terraform |
+| **S3 Backend** | Used for storing Terraform remote state |
 
 ---
 
@@ -81,55 +90,96 @@ The infrastructure includes the following AWS resources:
 
 ## 📂 Project Structure
 
+```text
 terraform-project/
 │
 ├── main.tf
 ├── provider.tf
 ├── variables.tf
 ├── output.tf
+├── backend.tf
 ├── terraform.tfvars
 ├── userdata.sh
 ├── userdata1.sh
 ├── .gitignore
 └── README.md
+```
 
+### File Description
+
+| File | Purpose |
+|------|---------|
+| `main.tf` | Defines the AWS infrastructure resources |
+| `provider.tf` | Configures the AWS provider |
+| `variables.tf` | Declares Terraform input variables |
+| `terraform.tfvars` | Provides values for Terraform variables |
+| `output.tf` | Defines Terraform outputs such as the ALB DNS |
+| `backend.tf` | Configures the Terraform S3 backend |
+| `userdata.sh` | Startup configuration for EC2 instance 1 |
+| `userdata1.sh` | Startup configuration for EC2 instance 2 |
+| `.gitignore` | Prevents unnecessary and sensitive files from being committed |
+| `README.md` | Project documentation |
+
+---
 
 # 🚀 Getting Started
 
-## 1 Prerequisites
+## 1️⃣ Prerequisites
 
 Before running this project, make sure you have:
 
 - An AWS account
 - AWS CLI installed
 - Terraform installed
+- Git installed
 - Proper AWS IAM permissions
 
 Verify the installations:
 
+```bash
 terraform --version
 aws --version
+git --version
+```
 
 ---
 
-## 2 Configure AWS Credentials
+## 2️⃣ Clone the Repository
+
+```bash
+git clone <your-repository-url>
+```
+
+Move into the project directory:
+
+```bash
+cd terraform-project
+```
+
+---
+
+## 3️⃣ Configure AWS Credentials
 
 Configure your AWS credentials using the AWS CLI:
 
-command: aws configure
-
+```bash
+aws configure
+```
 
 Provide:
 
+```text
 AWS Access Key ID
 AWS Secret Access Key
 Default region
 Output format
+```
 
 You can verify your AWS identity with:
 
+```bash
 aws sts get-caller-identity
-
+```
 
 > ⚠️ Never commit AWS access keys, secret keys, private keys, or other credentials to GitHub.
 
@@ -137,11 +187,13 @@ aws sts get-caller-identity
 
 # ⚙️ Terraform Workflow
 
-## 3 Initialize Terraform
+## 4️⃣ Initialize Terraform
 
 Initialize the Terraform working directory:
 
+```bash
 terraform init
+```
 
 This will:
 
@@ -152,52 +204,65 @@ This will:
 
 ---
 
-## 4 Format the Configuration
+## 5️⃣ Format the Configuration
 
 Format the Terraform files:
 
+```bash
 terraform fmt
+```
 
 This keeps the Terraform configuration consistently formatted.
 
 ---
 
-## 5 Validate the Configuration
+## 6️⃣ Validate the Configuration
 
 Run:
 
+```bash
 terraform validate
+```
 
 This checks whether the Terraform configuration is syntactically valid and internally consistent.
 
 ---
 
-## 6 Review the Execution Plan
+## 7️⃣ Review the Execution Plan
 
 Before creating any resources, review what Terraform intends to create:
 
+```bash
 terraform plan
+```
 
 Terraform will display the resources that will be:
 
+```text
 + created
 ~ modified
 - destroyed
+```
 
 Always review the plan before applying changes.
 
 ---
 
-## 7 Create the Infrastructure
+## 8️⃣ Create the Infrastructure
 
 Apply the configuration:
 
+```bash
 terraform apply
+```
 
 Terraform will ask for confirmation.
 
 Enter:
+
+```text
 yes
+```
 
 Terraform will then provision the AWS infrastructure.
 
@@ -209,17 +274,21 @@ After the infrastructure is created, Terraform outputs the Application Load Bala
 
 Run:
 
+```bash
 terraform output
+```
 
 Or specifically:
 
+```bash
 terraform output loadbalancerdns
-
+```
 
 You can then open the ALB DNS name in a browser:
 
+```text
 http://<ALB-DNS-NAME>
-
+```
 
 Traffic will be handled by the Application Load Balancer and forwarded to the EC2 instances through the configured Target Group.
 
@@ -229,6 +298,7 @@ Traffic will be handled by the Application Load Balancer and forwarded to the EC
 
 The traffic flow is:
 
+```text
 User
  │
  ▼
@@ -243,8 +313,38 @@ Target Group
  ├──────────────► EC2 Instance 1
  │
  └──────────────► EC2 Instance 2
+```
 
 The EC2 instances are deployed inside the VPC's public subnets and configured using Terraform.
+
+---
+
+# 📊 Terraform State
+
+This project uses an **Amazon S3 backend** for Terraform remote state.
+
+Instead of keeping the Terraform state only on the local machine:
+
+```text
+Local Machine
+     │
+     ▼
+terraform.tfstate
+```
+
+the state is stored remotely:
+
+```text
+Terraform
+     │
+     ▼
+Amazon S3
+     │
+     ▼
+Remote Terraform State
+```
+
+Using remote state helps keep infrastructure state available outside the local machine and is useful when working with infrastructure collaboratively.
 
 ---
 
@@ -311,11 +411,15 @@ Through this project, I practiced and gained a better understanding of:
 
 When the infrastructure is no longer required, it can be removed using:
 
+```bash
 terraform destroy
+```
 
 Review the resources Terraform plans to remove and confirm with:
 
+```text
 yes
+```
 
 > ⚠️ Be careful when using `terraform destroy`, as it removes resources managed by the Terraform configuration.
 
@@ -349,3 +453,27 @@ Learning and building with:
 `AWS` • `Terraform` • `DevOps` • `Cloud Computing`
 
 ---
+
+⭐ **Learning by building, one project at a time.**
+```
+
+### One thing before you upload it
+
+Replace this:
+
+```text
+<your-repository-url>
+```
+
+with your actual GitHub repository URL.
+
+Also, **don't commit `terraform.tfvars` if it contains sensitive or environment-specific values**, and keep this in `.gitignore`:
+
+```gitignore
+terraform.tfvars
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+```
+
+Keep `.terraform.lock.hcl` tracked in Git.
