@@ -302,35 +302,6 @@ The EC2 instances are deployed inside the VPC's public subnets and configured us
 
 ---
 
-# 📊 Terraform State
-
-This project uses an **Amazon S3 backend** for Terraform remote state.
-
-Instead of keeping the Terraform state only on the local machine:
-
-```text
-Local Machine
-     │
-     ▼
-terraform.tfstate
-```
-
-the state is stored remotely:
-
-```text
-Terraform
-     │
-     ▼
-Amazon S3
-     │
-     ▼
-Remote Terraform State
-```
-
-Using remote state helps keep infrastructure state available outside the local machine and is useful when working with infrastructure collaboratively.
-
----
-
 # 🔐 Security Considerations
 
 This project is primarily intended for learning and experimentation.
@@ -430,6 +401,7 @@ Some areas I plan to explore next:
 # 👨‍💻 Author
 
 **Dean Alemao**
+
 **Github link**: https://github.com/Deanalemao/terraform-project.git
 
 Learning and building with:
