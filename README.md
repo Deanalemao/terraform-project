@@ -1,4 +1,3 @@
-```markdown
 # 🚀 AWS Infrastructure with Terraform
 
 > A hands-on Infrastructure as Code project for provisioning and managing AWS infrastructure using Terraform.
@@ -97,7 +96,6 @@ terraform-project/
 ├── provider.tf
 ├── variables.tf
 ├── output.tf
-├── backend.tf
 ├── terraform.tfvars
 ├── userdata.sh
 ├── userdata1.sh
@@ -114,7 +112,6 @@ terraform-project/
 | `variables.tf` | Declares Terraform input variables |
 | `terraform.tfvars` | Provides values for Terraform variables |
 | `output.tf` | Defines Terraform outputs such as the ALB DNS |
-| `backend.tf` | Configures the Terraform S3 backend |
 | `userdata.sh` | Startup configuration for EC2 instance 1 |
 | `userdata1.sh` | Startup configuration for EC2 instance 2 |
 | `.gitignore` | Prevents unnecessary and sensitive files from being committed |
@@ -124,7 +121,7 @@ terraform-project/
 
 # 🚀 Getting Started
 
-## 1️⃣ Prerequisites
+## 1 Prerequisites
 
 Before running this project, make sure you have:
 
@@ -144,21 +141,7 @@ git --version
 
 ---
 
-## 2️⃣ Clone the Repository
-
-```bash
-git clone <your-repository-url>
-```
-
-Move into the project directory:
-
-```bash
-cd terraform-project
-```
-
----
-
-## 3️⃣ Configure AWS Credentials
+## 2 Configure AWS Credentials
 
 Configure your AWS credentials using the AWS CLI:
 
@@ -187,7 +170,7 @@ aws sts get-caller-identity
 
 # ⚙️ Terraform Workflow
 
-## 4️⃣ Initialize Terraform
+## 3 Initialize Terraform
 
 Initialize the Terraform working directory:
 
@@ -204,7 +187,7 @@ This will:
 
 ---
 
-## 5️⃣ Format the Configuration
+## 4 Format the Configuration
 
 Format the Terraform files:
 
@@ -216,7 +199,7 @@ This keeps the Terraform configuration consistently formatted.
 
 ---
 
-## 6️⃣ Validate the Configuration
+## 5 Validate the Configuration
 
 Run:
 
@@ -228,7 +211,7 @@ This checks whether the Terraform configuration is syntactically valid and inter
 
 ---
 
-## 7️⃣ Review the Execution Plan
+## 6 Review the Execution Plan
 
 Before creating any resources, review what Terraform intends to create:
 
@@ -248,7 +231,7 @@ Always review the plan before applying changes.
 
 ---
 
-## 8️⃣ Create the Infrastructure
+## 7 Create the Infrastructure
 
 Apply the configuration:
 
@@ -447,33 +430,10 @@ Some areas I plan to explore next:
 # 👨‍💻 Author
 
 **Dean Alemao**
+**Github link**: https://github.com/Deanalemao/terraform-project.git
 
 Learning and building with:
 
 `AWS` • `Terraform` • `DevOps` • `Cloud Computing`
 
 ---
-
-⭐ **Learning by building, one project at a time.**
-```
-
-### One thing before you upload it
-
-Replace this:
-
-```text
-<your-repository-url>
-```
-
-with your actual GitHub repository URL.
-
-Also, **don't commit `terraform.tfvars` if it contains sensitive or environment-specific values**, and keep this in `.gitignore`:
-
-```gitignore
-terraform.tfvars
-terraform.tfstate
-terraform.tfstate.backup
-.terraform/
-```
-
-Keep `.terraform.lock.hcl` tracked in Git.
